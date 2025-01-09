@@ -6,10 +6,7 @@ import os
 main = Blueprint("main", __name__)
 
 # 資料夾路徑
-#UPLOAD_FOLDER = "uploads"
-#PROCESSED_FOLDER = "processed"
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 獲取當前文件所在目錄的絕對路徑
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 絕對路徑的基準
 UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
 PROCESSED_FOLDER = os.path.join(BASE_DIR, "processed")
 
@@ -36,4 +33,8 @@ def index():
 
 @main.route("/download/<filename>")
 def download_file(filename):
-    return send_file(os.path.join(PROCESSED_FOLDER, filename), as_attachment=True)
+    file_path = os.path.join(PROCESSED_FOLDER, filename)
+    print(f"下載文件路徑: {file_path}")  # 打印路徑以便調試
+    if not os.path.exists(file_path):  # 檢查文件是否存在
+        return "<p>文件不存在，無法下載！</p>", 404
+    return send_file(file_path, as_attachment=True)
