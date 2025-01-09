@@ -1,0 +1,7 @@
+# 排除 uploads 和 processed 資料夾
+uploads/
+processed/
+
+# 排除可能的臨時文件
+*.log
+*.tmp
