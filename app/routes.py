@@ -6,8 +6,12 @@ import os
 main = Blueprint("main", __name__)
 
 # 資料夾路徑
-UPLOAD_FOLDER = "uploads"
-PROCESSED_FOLDER = "processed"
+#UPLOAD_FOLDER = "uploads"
+#PROCESSED_FOLDER = "processed"
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 獲取當前文件所在目錄的絕對路徑
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
+PROCESSED_FOLDER = os.path.join(BASE_DIR, "processed")
 
 # 確保目錄存在
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
